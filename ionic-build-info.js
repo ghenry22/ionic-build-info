@@ -13,7 +13,7 @@ var inputFile = path.join(process.cwd(), 'package.json');
 var outputFolder = path.join(process.cwd(), 'src/app');
 var outputFile = path.join(outputFolder, 'buildinfo.ts');
 function outputHighlighted(highlight, msg) {
-    console.log(chalk.yellow(highlight + ": ") + msg);
+    console.log(chalk.yellow("".concat(highlight, ": ")) + msg);
 }
 // Opening window
 console.log(boxen(appName, { padding: 1 }));
@@ -42,13 +42,12 @@ var rawData = fs.readFileSync(inputFile);
 var packageDotJSON = JSON.parse(rawData);
 var buildVersion = packageDotJSON.version;
 outputHighlighted('Build version', buildVersion);
-outputHighlighted('Build date', buildDate.toString() + " (" + buildDate.getTime().toString() + ")");
+outputHighlighted('Build date', "".concat(buildDate.toString(), " (").concat(buildDate.getTime().toString(), ")"));
 console.log('\nWriting output file');
 var outputStr = 'export const buildInfo = {\n';
-outputStr += "  buildVersion: \"" + buildVersion + "\",\n";
-outputStr += "  buildDate: " + buildDate.getTime() + ",\n";
-outputStr += "  buildDateStr: \"" + buildDate + "\"\n";
-outputStr += '}';
+outputStr += "  buildVersion: '".concat(buildVersion, "',\n");
+outputStr += "  buildDate: ".concat(buildDate.getTime(), ",\n");
+outputStr += '};\n';
 fs.writeFile(outputFile, outputStr, function (err, data) {
     if (err) {
         console.log(chalk.red('\nError: Unable to write to file\n'));
