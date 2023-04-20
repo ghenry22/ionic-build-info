@@ -51,9 +51,9 @@ outputHighlighted('Build date', `${buildDate.toString()} (${buildDate.getTime().
 console.log('\nWriting output file');
 
 let outputStr = 'export const buildInfo = {\n';
-outputStr += `  buildVersion: "${buildVersion}",\n`;
+outputStr += `  buildVersion: '${buildVersion}',\n`;
 outputStr += `  buildDate: ${buildDate.getTime()},\n`;
-outputStr += '}';
+outputStr += '};\n';
 
 fs.writeFile(outputFile, outputStr, function (err: any, data: any) {
     if (err) {
